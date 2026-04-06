@@ -1,0 +1,133 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img class="logo" src="img/logo.png" alt="">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav m-auto mb-2 mb-lg-0 text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active " aria-current="page" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="about.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="products.html">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="login.html">Login</a>
+                    </li>
+                </ul>
+                <img class="chart" src="img/add-to-cart.png" alt="">
+            </div>
+        </div>
+    </nav>
+
+    <main class="site-main">
+        <section class="contact-section">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h1>Contact Us</h1>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-lg-6">
+                        <div class="contact-card">
+                            <h2>Get in Touch</h2>
+                            <form>
+                                <div class="mb-4">
+                                    <label class="contact-label" for="contact-name">Name</label>
+                                    <input id="contact-name" type="text" class="form-control contact-input" placeholder="Your Name">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="contact-label" for="contact-email">Email</label>
+                                    <input id="contact-email" type="email" class="form-control contact-input" placeholder="Your Email">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="contact-label" for="contact-message">Message</label>
+                                    <textarea id="contact-message" rows="6" class="form-control contact-textarea" placeholder="Your Message"></textarea>
+                                </div>
+                                <button type="submit" class="contact-button">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="contact-card">
+                            <h2>Contact Information</h2>
+                            <p><strong>Address:</strong> 456 Elm Street, Springfield, USA</p>
+                            <p><strong>Phone:</strong> +1234-567-890</p>
+                            <p><strong>Email:</strong> contact@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="container-fluid px-5 py-5">
+            <div class="row">
+                <div class="col-md-3 mb-4">
+                    <h4>About Us</h4>
+                    <p>We provide high-quality products at the best prices.</p>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="./products.html">Products</a></li>
+                        <li><a href="./about.html">About</a></li>
+                        <li><a href="./contact.html">Contact</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h4>Customer Service</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h4>Follow Us</h4>
+                    <div class="footer-social d-flex gap-2">
+                        <a href="https://www.facebook.com/" class="social-icon" aria-label="Facebook">F</a>
+                        <a href="https://twitter.com/" class="social-icon" aria-label="Twitter">T</a>
+                        <a href="https://instagram.com/" class="social-icon" aria-label="Instagram">I</a>
+                        <a href="https://linkedin.com/" class="social-icon" aria-label="LinkedIn">L</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom text-center py-3">
+            <p>© 2026 YourBrand. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
