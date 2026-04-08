@@ -873,3 +873,8 @@ body::before {
 .imgcar{
     object-fit: contain;
 }
+
+.carousel-item{
+    height: 80vh;
+    object-fit: contain;
+}
