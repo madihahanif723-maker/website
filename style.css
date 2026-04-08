@@ -1,4 +1,19 @@
-/* Reset and Base Styles */
+:root {
+    --bg-start: #f5f0ff;
+    --bg-end: #f9fbff;
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --accent: #f97316;
+    --accent-dark: #c2410c;
+    --surface: rgba(255, 255, 255, 0.95);
+    --surface-strong: rgba(255, 255, 255, 0.98);
+    --muted: #475569;
+    --text: #0f172a;
+    --border: rgba(79, 70, 229, 0.16);
+    --shadow-soft: 0 20px 60px rgba(15, 23, 42, 0.08);
+    --shadow-strong: 0 24px 80px rgba(15, 23, 42, 0.12);
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -11,14 +26,28 @@ html {
 
 body {
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    line-height: 1.7;
+    color: var(--text);
+    background: radial-gradient(circle at 20% top, rgba(109,93,252,0.15), transparent 24%),
+        radial-gradient(circle at 90% 20%, rgba(251,113,133,0.12), transparent 20%),
+        linear-gradient(180deg, var(--bg-start), var(--bg-end));
     min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: radial-gradient(circle at 12% 12%, rgba(255,255,255,0.28) 0, transparent 20%),
+        radial-gradient(circle at 88% 15%, rgba(255,255,255,0.18) 0, transparent 18%);
+    pointer-events: none;
+    z-index: -1;
 }
 
 .site-main {
-    flex: 1;
+    padding: 90px 0 60px;
+    min-height: calc(100vh - 240px);
 }
 
 /* Navbar Styling */
@@ -230,6 +259,37 @@ body {
     color: #28a745;
     font-weight: 700;
     font-size: 1.2rem;
+}
+
+.product-card-footer {
+    background: #fff;
+    border-top: 1px solid rgba(102, 126, 234, 0.15);
+    padding: 1rem 1rem 1.25rem;
+}
+
+.btn-cart {
+    width: 100%;
+    background: linear-gradient(135deg, #ff8a65 0%, #ff5722 100%);
+    border: none;
+    color: #fff;
+    border-radius: 12px;
+    padding: 0.95rem 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 12px 25px rgba(255, 87, 34, 0.18);
+    transition: all 0.25s ease;
+    cursor: pointer;
+}
+
+.btn-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 30px rgba(255, 87, 34, 0.25);
+    background: linear-gradient(135deg, #ff7043 0%, #f4511e 100%);
+}
+
+.btn-cart:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(255, 87, 34, 0.25);
 }
 
 /* Login Section */
@@ -536,6 +596,180 @@ body {
     font-weight: 600;
 }
 
+/* Advanced visual polish */
+.navbar {
+    background: rgba(255,255,255,0.86) !important;
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(102,126,234,0.14);
+    box-shadow: 0 18px 50px rgba(15,23,42,0.08);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar .navbar-nav .nav-link {
+    color: #334155 !important;
+    font-weight: 600;
+}
+
+.navbar .navbar-nav .nav-link.active,
+.navbar .navbar-nav .nav-link:hover {
+    color: var(--primary-dark) !important;
+}
+
+.navbar .navbar-nav .nav-link::after {
+    background-color: var(--accent);
+}
+
+.logo {
+    width: 100px;
+    margin-left: 0;
+}
+
+.chart {
+    width: 42px;
+}
+
+.section-title {
+    font-size: clamp(2rem, 3vw, 3.25rem);
+    letter-spacing: 0.02em;
+    color: #111827;
+}
+
+.secti {
+    min-height: 640px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.secti::before {
+    background: linear-gradient(180deg, rgba(15,23,42,0.35), rgba(15,23,42,0.08) 45%, rgba(255,255,255,0.04));
+}
+
+.secti h1,
+.secti p {
+    color: #f8fafc;
+}
+
+.products-section {
+    padding: 100px 0;
+}
+
+.products-section .container {
+    max-width: 1200px;
+}
+
+.products-section .form-select {
+    border-radius: 18px;
+    border: 1px solid rgba(102,126,234,0.2);
+    background: rgba(255,255,255,0.95);
+    box-shadow: inset 0 1px 5px rgba(15,23,42,0.04);
+    transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.products-section .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.18rem rgba(109,93,252,0.18);
+    transform: translateY(-1px);
+}
+
+.card.h-100.imgcar {
+    border-radius: 26px;
+    overflow: hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(248,250,252,0.95));
+    border: 1px solid rgba(102,126,234,0.18);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.card.h-100.imgcar:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow-strong);
+}
+
+.card.h-100.imgcar .card-img-top {
+    height: 320px;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+}
+
+.card.h-100.imgcar:hover .card-img-top {
+    transform: scale(1.06);
+}
+
+.card.h-100.imgcar .card-body {
+    padding: 1.5rem;
+}
+
+.card.h-100.imgcar .card-title {
+    font-size: 1.2rem;
+    color: #111827;
+    margin-bottom: 0.75rem;
+}
+
+.card.h-100.imgcar .card-text {
+    color: #475569;
+    min-height: 90px;
+}
+
+.product-card-footer {
+    background: transparent;
+    border-top: 1px solid rgba(102,126,234,0.12);
+    padding: 1rem 1.5rem 1.3rem;
+}
+
+.btn-cart {
+    width: 100%;
+    background: linear-gradient(135deg, #4f46e5 0%, #f97316 100%);
+    border: none;
+    color: #fff;
+    border-radius: 14px;
+    padding: 0.95rem 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    box-shadow: 0 14px 32px rgba(249,115,22,0.18);
+    transition: all 0.25s ease;
+}
+
+.btn-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 36px rgba(249,115,22,0.24);
+    background: linear-gradient(135deg, #3730a3 0%, #c2410c 100%);
+}
+
+.btn-cart:focus {
+    outline: none;
+    box-shadow: 0 0 0 0.25rem rgba(249,115,22,0.24);
+}
+
+.footer-section {
+    background: linear-gradient(135deg, #111827, #0f172a 65%, #1e293b);
+}
+
+.footer-section h4 {
+    color: #f8fafc;
+}
+
+.footer-section p,
+.footer-section .footer-links li a {
+    color: #cbd5e1;
+}
+
+.footer-section .footer-links li a:hover {
+    color: #fff;
+}
+
+.social-icon {
+    background: #1f2937;
+    box-shadow: 0 10px 24px rgba(15,23,42,0.12);
+}
+
+.social-icon:hover {
+    background: #3b82f6;
+    color: #fff;
+}
+
 .login-section {
     flex: 1;
     padding: 100px 0 60px;
@@ -635,4 +869,7 @@ body {
     .chart {
         margin-right: 20px;
     }
+}
+.imgcar{
+    object-fit: contain;
 }
