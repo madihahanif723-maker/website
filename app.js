@@ -639,15 +639,15 @@ var categoryMenu = document.getElementById("categoryMenu");
 var sidebar = document.getElementById("sidebar");
 
 if (shop && productMenu && categoryMenu && sidebar) {
-for (var category in allProducts) {
-    //console.log(allProducts[category]);
-    for (var subcategory in allProducts[category]) {
-        //console.log(allProducts[category][subcategory]);
-        for (var brand in allProducts[category][subcategory]) {
-            //    console.log(allProducts[category][subcategory][brand]);
-            for (var product in allProducts[category][subcategory][brand]) {
-                console.log(allProducts[category][subcategory][brand][product].name);
-                shop.innerHTML += `
+    for (var category in allProducts) {
+        //console.log(allProducts[category]);
+        for (var subcategory in allProducts[category]) {
+            //console.log(allProducts[category][subcategory]);
+            for (var brand in allProducts[category][subcategory]) {
+                //    console.log(allProducts[category][subcategory][brand]);
+                for (var product in allProducts[category][subcategory][brand]) {
+                    // console.log(allProducts[category][subcategory][brand][product].name);
+                    shop.innerHTML += `
             <div class="card h-100 m-2 imgcar">
               <img src="${allProducts[category][subcategory][brand][product].src}" class="card-img-top" alt="${allProducts[category][subcategory][brand][product].name}">
               <div class="card-body">
@@ -658,15 +658,19 @@ for (var category in allProducts) {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${allProducts[category][subcategory][brand][product].price}/-</small>
                 </div>
-               <button type="button" onclick="chartbtn()" class="btn btn-cart">
+               <button type="button" onclick="chartbtn(this)" class="btn btn-cart"
+                    data-name="${allProducts[category][subcategory][brand][product].name}"
+                    data-price="${allProducts[category][subcategory][brand][product].price}"
+                    data-src="${allProducts[category][subcategory][brand][product].src}"
+                    data-description="${allProducts[category][subcategory][brand][product].description}">
                Add to Cart
                </button>
               </div>
-            </div>`
+            </div>`}
+                }
             }
         }
     }
-}
 
 
 
@@ -674,13 +678,12 @@ for (var category in allProducts) {
 
 
 
-for (var products in allProducts) {
-    // console.log(products);
-    productMenu.innerHTML += `
+    for (var products in allProducts) {
+        // console.log(products);
+        productMenu.innerHTML += `
     <option value="${products}">${products}</option>
     `;
-}
-}
+    }
 function productChange() {
     if (!productMenu.value) {
         categoryMenu.innerHTML = `<option value="">Select Category</option>`;
@@ -717,16 +720,20 @@ function productChange() {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-               <button type="button" onclick="chartbtn()" class="btn btn-cart">
+               <button type="button" onclick="chartbtn(this)" class="btn btn-cart"
+                    data-name="${itemDetails.name}"
+                    data-price="${itemDetails.price}"
+                    data-src="${itemDetails.src}"
+                    data-description="${itemDetails.description}">
                  Add to Cart
                   </button>
               </div>
-            </div>`;
+            </div>`}
             }
         }
     }
-}
-function filterProduct () {
+
+function filterProduct() {
     if (!productMenu.value || !categoryMenu.value) {
         shop.innerHTML = "";
         sidebar.innerHTML = "";
@@ -758,14 +765,18 @@ function filterProduct () {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-                <button type="button" onclick="chartbtn()" class="btn btn-cart">
+                <button type="button" onclick="chartbtn(this)" class="btn btn-cart"
+                    data-name="${itemDetails.name}"
+                    data-price="${itemDetails.price}"
+                    data-src="${itemDetails.src}"
+                    data-description="${itemDetails.description}">
                Add to Cart
                </button>
               </div>
-            </div>`;
+            </div>`}
         }
     }
-}
+
 function filterBrands(brand) {
     if (!productMenu.value || !categoryMenu.value || !brand) {
         return;
@@ -785,7 +796,11 @@ function filterBrands(brand) {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-                <button type="button" onclick="chartbtn()" class="btn btn-cart">
+                <button type="button" onclick="chartbtn(this)" class="btn btn-cart"
+                    data-name="${itemDetails.name}"
+                    data-price="${itemDetails.price}"
+                    data-src="${itemDetails.src}"
+                    data-description="${itemDetails.description}">
                 Add to Cart
                </button>
               </div>
@@ -827,6 +842,119 @@ function login(event) {
     }
 
 }
-function chartbtn(){
-    
+var allProductsArray = []
+function createCard(product) {
+    var index = allProductsArray.length;
+    allProductsArray.push(product);
+    return `
+   <div class="card h-100 m-2 imgcar">
+              <img src="${product.src}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${product.description}</p>
+               </div>
+              <div class="card-footer product-card-footer d-flex flex-column gap-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-body-secondary price">Price: ${product.price}/-</small>
+                </div>
+                <button type="button" onclick="chartbtn(this)" class="btn btn-cart"
+                    data-name="${product.name}"
+                    data-price="${product.price}"
+                    data-src="${product.src}"
+                    data-description="${product.description}">
+                Add to Cart
+               </button>
+              </div>
+            </div> `;
 }
+
+function chartbtn(indexOrButton) {
+    var product;
+    if (typeof indexOrButton === "number") {
+        product = allProductsArray[indexOrButton];
+    } else if (indexOrButton && indexOrButton.dataset) {
+        product = {
+            name: indexOrButton.dataset.name,
+            price: indexOrButton.dataset.price,
+            src: indexOrButton.dataset.src,
+            description: indexOrButton.dataset.description
+        };
+    } else {
+        return;
+    }
+    Swal.fire({
+        title: "Confirm Purchase 🛒",
+        html: `
+            <div class="card h-100 m-2 imgcar">
+              <img src="${product.src}" class="card-img-top" alt="${product.name}">
+              <div class="card-body">
+                <h5 class="card-title">${product.name}</h5>
+                <p class="card-text">${product.description}</p>
+               </div>
+              <div class="card-footer product-card-footer d-flex flex-column gap-3">
+                <div class="d-flex justify-content-between align-items-center">
+                  <small class="text-body-secondary price">Price: ${product.price}/-</small>
+                </div>
+                <button type="button" onclick="return false;" class="btn btn-cart">
+                Add to Cart
+               </button>
+              </div>
+            </div> 
+        `,
+        showCancelButton: true,
+        confirmButtonText: "Yes, Buy Now💖",
+        cancelButtonText: "No cancel❌",
+        confirmButtonColor: "#c9a515",
+        cancelButtonColor: "#030303",
+        background: "#100f0f",
+        color: "#3d2c1e",
+
+        showClass: {
+            popup: "animate__animated animate__zoomIn"
+        },
+        hideClass: {
+            popup: "animate__animated animate__fadeOut"
+        }
+
+
+    }).then(function (result) {
+
+        if (result.isConfirmed) {
+
+            Swal.fire({
+                title: "🎉 Added to Cart!",
+                html: `
+                    <b style="color:#3d2c1e;">${product.name}</b><br>
+                    <span style="color:#8b5e3c;">Successfully added</span>
+                `,
+                icon: "success",
+                confirmButtonColor: "#d4af37",
+                background: "#f5e6cc",
+                color: "#3d2c1e",
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+        else if (result.dismiss === Swal.DismissReason.cancel) {
+
+            Swal.fire({
+                title: "😢 Cancelled",
+                text: "No problem! You can continue shopping 🛍️",
+                icon: "info",
+                confirmButtonColor: "#060606",
+                background: "#000000",
+                color: "#ffffff",
+                timer: 2000,
+                showConfirmButton: false
+            });
+        }
+
+    });
+}
+
+
+// Back button ka function
+function goBack() {
+    document.location.href = "index.html";
+}
+   
