@@ -658,7 +658,7 @@ for (var category in allProducts) {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${allProducts[category][subcategory][brand][product].price}/-</small>
                 </div>
-               <button type="button" class="btn btn-cart">
+               <button type="button" onclick="chartbtn()" class="btn btn-cart">
                Add to Cart
                </button>
               </div>
@@ -682,15 +682,25 @@ for (var products in allProducts) {
 }
 }
 function productChange() {
+    if (!productMenu.value) {
+        categoryMenu.innerHTML = `<option value="">Select Category</option>`;
+        shop.innerHTML = "";
+        sidebar.innerHTML = "";
+        sidebar.style.display = "none";
+        sidebar.classList.remove("sidebar-sticky");
+        sidebar.classList.add("sidebar");
+        return;
+    }
+
     sidebar.style.display = "none";
     sidebar.classList.remove("sidebar-sticky");
     sidebar.classList.add("sidebar");
-    categoryMenu.innerHTML = `<option  value="">Select Category</option>`;
+    categoryMenu.innerHTML = `<option value="">Select Category</option>`;
     shop.innerHTML = "";
     // console.log(allProducts[productMenu.value]);
     for (var categories in allProducts[productMenu.value]) {
         // console.log(allProducts[productMenu.value][categories]);
-        categoryMenu.innerHTML += `<option  value="${categories}">${categories}</option>`;
+        categoryMenu.innerHTML += `<option value="${categories}">${categories}</option>`;
         for (var brands in allProducts[productMenu.value][categories]) {
             // console.log(allProducts[productMenu.value][categories][brands]);
             for (var items in allProducts[productMenu.value][categories][brands]) {
@@ -707,7 +717,7 @@ function productChange() {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-               <button type="button" class="btn btn-cart">
+               <button type="button" onclick="chartbtn()" class="btn btn-cart">
                  Add to Cart
                   </button>
               </div>
@@ -718,6 +728,11 @@ function productChange() {
 }
 function filterProduct () {
     if (!productMenu.value || !categoryMenu.value) {
+        shop.innerHTML = "";
+        sidebar.innerHTML = "";
+        sidebar.style.display = "none";
+        sidebar.classList.remove("sidebar-sticky");
+        sidebar.classList.add("sidebar");
         return;
     }
     sidebar.innerHTML = "";
@@ -743,7 +758,7 @@ function filterProduct () {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-                <button type="button" class="btn btn-cart">
+                <button type="button" onclick="chartbtn()" class="btn btn-cart">
                Add to Cart
                </button>
               </div>
@@ -752,7 +767,10 @@ function filterProduct () {
     }
 }
 function filterBrands(brand) {
-    shop.innerHTML = ""
+    if (!productMenu.value || !categoryMenu.value || !brand) {
+        return;
+    }
+    shop.innerHTML = "";
     for (var items in allProducts[productMenu.value][categoryMenu.value][brand]) {
         // console.log(allProducts[productMenu.value][categoryMenu.value][brand][items]);
         var itemDetails = allProducts[productMenu.value][categoryMenu.value][brand][items]
@@ -767,7 +785,7 @@ function filterBrands(brand) {
                 <div class="d-flex justify-content-between align-items-center">
                   <small class="text-body-secondary price">Price: ${itemDetails.price}/-</small>
                 </div>
-                <button type="button" class="btn btn-cart">
+                <button type="button" onclick="chartbtn()" class="btn btn-cart">
                 Add to Cart
                </button>
               </div>
@@ -808,4 +826,7 @@ function login(event) {
 
     }
 
+}
+function chartbtn(){
+    
 }
