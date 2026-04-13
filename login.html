@@ -37,14 +37,14 @@
                         <a class="nav-link active" aria-current="page" href="login.html">Login</a>
                     </li>
                 </ul>
-                <img class="chart" src="img/add-to-cart.png" alt="">
+                <a href="products.html"><img class="chart" src="img/download.png" alt=""></a>
             </div>
         </div>
     </nav>
     <main class="site-main">
         <section class="login-section">
             <div class="container">
-                <div class="login-box mx-auto mt-5">
+                <div class="login-box mx-auto mt-5 p-4">
                     <h1 class="login-title">Login</h1>
                     <p class="login-subtitle">Welcome back! Enter your details to login.</p>
                     <form>
@@ -63,7 +63,7 @@
                                 <span class="password-toggle">&#128065;</span>
                             </div>
                         </div>
-                        <button type="submit" onclick="login()" class="login-button">Log In</button>
+                        <button type="submit" onclick="login(event)" class="login-button">Log In</button>
                     </form>
                 </div>
             </div>
